@@ -1,0 +1,26 @@
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        vector<ListNode*> nodes;
+        ListNode* temp=head;
+        if(!head || !head->next)
+            return head;
+            
+        while(temp)
+        {
+            nodes.push_back(temp);
+            temp=temp->next;
+        }
+        int len=nodes.size();
+        int times=0;
+        k=k%len;
+        while(times++<k)
+        {
+            nodes[len-1]->next=nodes[0];
+            nodes[len-2]->next=NULL;
+            nodes.insert(nodes.begin()+0,nodes[len-1]);
+            nodes.erase(nodes.begin()+len);
+        }
+        return nodes[0];
+    }
+};
