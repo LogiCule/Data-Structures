@@ -37,3 +37,37 @@ public:
         return false;
     }
 };
+
+/*Recursive Solution */
+
+class Solution {
+public:
+    bool helper(TreeNode* root, int sum) {
+        if(root->left && root->right)
+        {
+            return helper(root->left,sum-root->val) || helper(root->right,sum-root->val);
+        }
+        else if(root->left)
+        {
+            return helper(root->left,sum-root->val);
+        }
+        else if(root->right)
+        {
+            return helper(root->right,sum-root->val);
+        }
+        else
+        {
+            if((sum-root->val)==0)
+                return true;
+            else 
+                return false;;
+        }
+        
+        
+    }
+    bool hasPathSum(TreeNode* root, int sum) {
+        if(root==NULL)
+            return false;
+        return helper(root,sum);
+    }
+};
